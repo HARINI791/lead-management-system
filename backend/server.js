@@ -41,13 +41,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Database connection
-mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/management', {
+mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/lead-management', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  
 })
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('MongoDB connection error:', err));
+.then(() => console.log('✅ Connected to MongoDB'))
+.catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -69,6 +68,23 @@ app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Start server with port conflict handling
+const startServer = async () => {
+  try {
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
+    }).on("error", async (err) => {
+      if (err.code === "EADDRINUSE") {
+        console.warn(`⚠️ Port ${PORT} already in use. Please stop the existing process or use a different port.`);
+        process.exit(1);
+      } else {
+        throw err;
+      }
+    });
+  } catch (error) {
+    console.error("❌ Failed to start server:", error);
+    process.exit(1);
+  }
+};
+
+startServer();

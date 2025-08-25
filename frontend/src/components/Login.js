@@ -113,7 +113,7 @@ const Login = () => {
 
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              Test Account: test@example.com / password123
+              Test Account: testuser@example.com / password123
             </p>
           </div>
         </form>
