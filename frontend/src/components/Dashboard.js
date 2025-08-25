@@ -455,21 +455,6 @@ const Dashboard = () => {
         {/* Leads Grid */}
         <div className="px-4 sm:px-0">
           <div className="bg-white rounded-lg shadow">
-            {/* Debug Info */}
-            <div className="p-4 border-b border-gray-200 bg-gray-50">
-              <div className="text-sm text-gray-600">
-                <strong>Debug Info:</strong> Leads count: {leads.length},
-                Loading: {loading.toString()}, Page: {pagination.page}, Total:{" "}
-                {pagination.total}, TotalPages: {pagination.totalPages}
-              </div>
-              {leads.length > 0 && (
-                <div className="mt-2 text-xs text-gray-500">
-                  First lead: {leads[0]?.first_name} {leads[0]?.last_name} (
-                  {leads[0]?.email})
-                </div>
-              )}
-            </div>
-
             <div className="ag-theme-alpine w-full" style={{ height: "600px" }}>
               <AgGridReact
                 columnDefs={columnDefs}
