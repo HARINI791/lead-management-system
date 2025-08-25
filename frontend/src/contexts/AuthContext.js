@@ -26,7 +26,12 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await axios.get('/api/auth/me');
+      const response = await axios.get("/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json", // if formData is plain JSON
+        },
+      });
       setUser(response.data.user);
     } catch (error) {
       // User is not authenticated
@@ -40,6 +45,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post('/api/auth/login', { email, password });
       setUser(response.data.user);
+      localStorage.setItem("token", response.data.token);
       toast.success('Login successful!');
       return { success: true };
     } catch (error) {
@@ -53,6 +59,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post('/api/auth/register', userData);
       setUser(response.data.user);
+      localStorage.setItem("token", response.data.token);
       toast.success('Registration successful!');
       return { success: true };
     } catch (error) {
@@ -65,6 +72,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await axios.post('/api/auth/logout');
+      localStorage.removeItem("token");
       setUser(null);
       toast.success('Logout successful!');
     } catch (error) {

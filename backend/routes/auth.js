@@ -95,7 +95,6 @@ router.post('/login', [
     res.status(500).json({ error: 'Login failed' });
   }
 
-  console.log("Generated token:", token);
 
 });
 

@@ -36,9 +36,18 @@ const LeadForm = () => {
   }, [id]);
 
   const fetchLead = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
     try {
       setLoading(true);
-      const response = await axios.get(`/api/leads/${id}`);
+      const response = await axios.get(`/api/leads/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json", // if formData is plain JSON
+        },
+      });
       const lead = response.data.lead;
       
       setFormData({
@@ -76,13 +85,27 @@ const LeadForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
-
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+      return;
+    }
     try {
       if (isEditing) {
-        await axios.put(`/api/leads/${id}`, formData);
+        await axios.put(`/api/leads/${id}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", // if formData is plain JSON
+          },
+        });
         toast.success('Lead updated successfully');
       } else {
-        await axios.post('/api/leads', formData);
+        await axios.post("/api/leads", formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", // if formData is plain JSON
+          },
+        });
         toast.success('Lead created successfully');
       }
       navigate('/dashboard');
