@@ -166,26 +166,6 @@ This creates test accounts:
    - `FRONTEND_URL`
 3. Deploy automatically on push
 
-#### Railway
-1. Connect your GitHub repository
-2. Set environment variables in Railway dashboard
-3. Deploy automatically on push
-
-#### Heroku
-1. Create Heroku app
-2. Set environment variables
-3. Deploy using Git
-
-### Frontend Deployment
-
-
-```bash
-cd frontend
-npm install 
-vercel
-```
-
-
 
 ## 🔒 Security Features
 
@@ -221,7 +201,7 @@ After running the seed script, you can test with:
 - **Password**: `password123`
 
 ### API Testing
-Use tools like Postman or Thunder Client to test the API endpoints.
+Use tools like Postman to test the API endpoints.
 
 ## 🔧 Configuration
 
@@ -255,25 +235,6 @@ Use tools like Postman or Thunder Client to test the API endpoints.
 - **API rate limiting** per user
 - **Audit logging** for compliance
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-If you encounter any issues:
-1. Check the documentation
-2. Search existing issues
-3. Create a new issue with detailed information
-4. Include error logs and steps to reproduce
 
 ## 🙏 Acknowledgments
 
