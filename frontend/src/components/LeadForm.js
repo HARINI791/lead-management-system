@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Save, User, Mail, Phone, Building, MapPin, Target, TrendingUp, DollarSign, Calendar, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import API from '../api';
 
 const LeadForm = () => {
   const { id } = useParams();
@@ -42,7 +43,7 @@ const LeadForm = () => {
     }
     try {
       setLoading(true);
-      const response = await axios.get(`/api/leads/${id}`, {
+      const response = await API.get(`/api/leads/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json", // if formData is plain JSON
@@ -92,7 +93,7 @@ const LeadForm = () => {
     }
     try {
       if (isEditing) {
-        await axios.put(`/api/leads/${id}`, formData, {
+        await API.put(`/api/leads/${id}`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json", // if formData is plain JSON
@@ -100,7 +101,7 @@ const LeadForm = () => {
         });
         toast.success('Lead updated successfully');
       } else {
-        await axios.post("/api/leads", formData, {
+        await API.post("/api/leads", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json", // if formData is plain JSON

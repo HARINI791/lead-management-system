@@ -7,7 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-
+import API from '../api';
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Dashboard = () => {
       navigate("/login");
     }
     try {
-      await axios.delete(`/api/leads/${leadId}`, {
+      await API.delete(`/api/leads/${leadId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json", // if formData is plain JSON
@@ -251,7 +251,7 @@ const Dashboard = () => {
       });
 
       console.log("Fetching leads with params:", queryParams.toString());
-      const response = await axios.get(`/api/leads?${queryParams}`, {
+      const response = await API.get(`/api/leads?${queryParams}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json", // if formData is plain JSON

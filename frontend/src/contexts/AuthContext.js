@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-
+import API from '../api';
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -15,7 +15,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
   // Configure axios defaults
   axios.defaults.withCredentials = true;
 
@@ -24,9 +24,11 @@ export const AuthProvider = ({ children }) => {
     checkAuthStatus();
   }, []);
 
+  const token = localStorage.getItem("token");
+  
   const checkAuthStatus = async () => {
     try {
-      const response = await axios.get("/api/auth/me", {
+      const response = await API.get("/api/auth/me", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json", // if formData is plain JSON
@@ -43,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
+      const response = await API.post('/api/auth/login', { email, password });
       setUser(response.data.user);
       localStorage.setItem("token", response.data.token);
       toast.success('Login successful!');
@@ -57,7 +59,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await axios.post('/api/auth/register', userData);
+      const response = await API.post('/api/auth/register', userData);
       setUser(response.data.user);
       localStorage.setItem("token", response.data.token);
       toast.success('Registration successful!');
@@ -71,7 +73,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post('/api/auth/logout');
+      await API.post('/api/auth/logout');
       localStorage.removeItem("token");
       setUser(null);
       toast.success('Logout successful!');
