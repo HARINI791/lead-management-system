@@ -109,6 +109,7 @@ npm install
 **Backend:**
 ```bash
 cd backend
+npm install
 npm run dev
 # Server runs on http://localhost:5000
 ```
@@ -116,6 +117,7 @@ npm run dev
 **Frontend:**
 ```bash
 cd frontend
+npm install
 npm start
 # App opens at http://localhost:3000
 ```
@@ -127,9 +129,7 @@ npm run seed
 ```
 
 This creates test accounts:
-- `test@example.com` / `password123` (120 leads)
-- `admin@example.com` / `admin123` (20 leads)
-- `user@example.com` / `user123` (20 leads)
+- `testuser@example.com` / `password123` (120 leads)
 
 ## 🌐 API Endpoints
 
@@ -178,19 +178,14 @@ This creates test accounts:
 
 ### Frontend Deployment
 
-#### Vercel (Recommended)
+
 ```bash
 cd frontend
-npm install -g vercel
+npm install 
 vercel
 ```
 
-#### Netlify
-```bash
-cd frontend
-npm run build
-# Upload build folder to Netlify
-```
+
 
 ## 🔒 Security Features
 
@@ -222,7 +217,7 @@ npm run build
 
 ### Test Accounts
 After running the seed script, you can test with:
-- **Email**: `test@example.com`
+- **Email**: `testuser@example.com`
 - **Password**: `password123`
 
 ### API Testing
