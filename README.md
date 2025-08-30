@@ -243,6 +243,4 @@ Use tools like Postman to test the API endpoints.
 - **Tailwind CSS** for the utility-first CSS framework
 - **AG Grid** for the professional data grid component
 
----
 
-**Happy Coding! 🎉**
